@@ -3,7 +3,7 @@
 Passo a passo para enviar a submissão oficial à Rinha 2026.
 
 - **Repositório**: https://github.com/l4y3rS3v3n/rinha-backend_2026
-- **Imagem GHCR**: `ghcr.io/l4y3rS3v3n/rinha-backend_2026:vX.Y.Z`
+- **Imagem GHCR**: `ghcr.io/l4y3rs3v3n/rinha-backend_2026:vX.Y.Z`
 - **Participant ID**: `l4y3rS3v3n-dotnet`
 
 ## Pré-requisitos (uma vez)
@@ -26,13 +26,13 @@ git remote add origin git@github.com:l4y3rS3v3n/rinha-backend_2026.git
 git branch -M main
 git push -u origin main
 
-# Dispara o workflow `publish` — publica ghcr.io/l4y3rS3v3n/rinha-backend_2026:v0.1.0
+# Dispara o workflow `publish` — publica ghcr.io/l4y3rs3v3n/rinha-backend_2026:v0.1.0
 git tag v0.1.0
 git push origin v0.1.0
 ```
 
 - [ ] Workflow `publish` verde em Actions.
-- [ ] `docker pull ghcr.io/l4y3rS3v3n/rinha-backend_2026:v0.1.0` baixa a imagem.
+- [ ] `docker pull ghcr.io/l4y3rs3v3n/rinha-backend_2026:v0.1.0` baixa a imagem.
 - [ ] Tornar o package público: Packages → rinha-backend_2026 → Settings → Change visibility → Public.
 
 ## Validar localmente em **bridge** mode
@@ -67,7 +67,7 @@ git checkout main
 ```
 
 - [ ] Branch `submission` existe no GitHub.
-- [ ] `docker-compose.yml` na `submission` tem `image: ghcr.io/l4y3rS3v3n/rinha-backend_2026:v0.1.0` (semver, sem `:latest`).
+- [ ] `docker-compose.yml` na `submission` tem `image: ghcr.io/l4y3rs3v3n/rinha-backend_2026:v0.1.0` (semver, sem `:latest`).
 - [ ] Apenas 3 arquivos na `submission`: `docker-compose.yml`, `nginx.conf`, `info.json`.
 
 ## Inscrever na Rinha

@@ -31,6 +31,12 @@ jobs:
             echo "tag=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
           fi
 
+      # OCI image refs require all-lowercase repo names; github.repository
+      # preserves the original casing, so we normalize here.
+      - name: Resolve image repo (lowercase)
+        id: repo
+        run: echo "name=${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+
       # The rinha-provided static dataset is pulled fresh at build time rather
       # than committed to this repo.
       - name: Fetch reference dataset from official rinha repo
@@ -58,6 +64,6 @@ jobs:
           platforms: linux/amd64
           push: true
           provenance: false
-          tags: ghcr.io/${{ github.repository }}:${{ steps.ver.outputs.tag }}
+          tags: ghcr.io/${{ steps.repo.outputs.name }}:${{ steps.ver.outputs.tag }}
           cache-from: type=gha
           cache-to: type=gha,mode=max

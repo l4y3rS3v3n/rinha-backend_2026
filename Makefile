@@ -13,7 +13,8 @@ INDEX_BACKEND   ?= simd
 HNSW_EF_SEARCH  ?= 64
 
 GITHUB_USER     ?= l4y3rS3v3n
-GITHUB_REPO     ?= $(GITHUB_USER)/rinha-backend_2026
+# GHCR/OCI image refs must be lowercase — keep this in sync with $(GITHUB_USER).
+GITHUB_REPO     ?= l4y3rs3v3n/rinha-backend_2026
 
 EXPORT_ENV := \
   RINHA_IMAGE=$(IMAGE) \
