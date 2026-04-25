@@ -12,8 +12,8 @@ REFERENCE_LIMIT ?= 0
 INDEX_BACKEND   ?= simd
 HNSW_EF_SEARCH  ?= 64
 
-GITHUB_USER     ?= <SEU_USER>
-GITHUB_REPO     ?= $(GITHUB_USER)/rinha-2026-dotnet
+GITHUB_USER     ?= l4y3rS3v3n
+GITHUB_REPO     ?= $(GITHUB_USER)/rinha-backend_2026
 
 EXPORT_ENV := \
   RINHA_IMAGE=$(IMAGE) \
@@ -108,8 +108,8 @@ diag:   ## Run Python vectorizer vs gold-standard diagnostic
 submission:   ## Materialize submission-branch contents into ./submission-out/
 	@if [[ ! "$(VERSION)" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$$ ]]; then \
 	   echo "error: VERSION=$(VERSION) is not semver (vX.Y.Z)" >&2; exit 1; fi
-	@if [[ "$(GITHUB_REPO)" == "<SEU_USER>"* ]]; then \
-	   echo "warning: GITHUB_REPO not set — compose will reference <SEU_USER>" >&2; fi
+	@if [[ -z "$(GITHUB_REPO)" ]]; then \
+	   echo "error: GITHUB_REPO is empty" >&2; exit 1; fi
 	@rm -rf submission-out
 	@mkdir -p submission-out
 	@cp info.json         submission-out/info.json
