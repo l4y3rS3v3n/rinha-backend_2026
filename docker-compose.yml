@@ -1,5 +1,5 @@
 x-api: &api
-  image: ghcr.io/l4y3rS3v3n/rinha-backend_2026:v0.1.0
+  image: ghcr.io/l4y3rs3v3n/rinha-backend_2026:v0.1.1
   # Root needed to bind() UDS files on the shared volume; nginx worker also root.
   user: "0:0"
   volumes:
