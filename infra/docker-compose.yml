@@ -1,0 +1,58 @@
+x-api: &api
+  image: ${RINHA_IMAGE:-rinha-2026-dotnet:v0.1.0}
+  # Root needed to bind() UDS files on the shared volume; nginx worker also root.
+  user: "0:0"
+  volumes:
+    - sockets:/sockets:rw
+  deploy:
+    resources:
+      limits:
+        cpus: "0.45"
+        memory: "150MB"
+  networks:
+    - rinha
+
+x-api-env: &api-env
+  RINHA_REFERENCE_LIMIT: ${RINHA_REFERENCE_LIMIT:-0}
+  RINHA_INDEX_BACKEND: ${RINHA_INDEX_BACKEND:-simd}
+
+services:
+  load-balancer:
+    image: nginx:1.27-alpine
+    container_name: rinha-lb
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - sockets:/sockets:rw
+    ports:
+      - "9999:9999"
+    depends_on:
+      - api-1
+      - api-2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.10"
+          memory: "50MB"
+    networks:
+      - rinha
+
+  api-1:
+    <<: *api
+    container_name: rinha-api-1
+    environment:
+      <<: *api-env
+      RINHA_LISTEN_SOCKET: /sockets/api-1.sock
+
+  api-2:
+    <<: *api
+    container_name: rinha-api-2
+    environment:
+      <<: *api-env
+      RINHA_LISTEN_SOCKET: /sockets/api-2.sock
+
+volumes:
+  sockets:
+
+networks:
+  rinha:
+    driver: bridge

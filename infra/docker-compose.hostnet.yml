@@ -1,0 +1,19 @@
+# Local override for hosts without the veth kernel module — not for submission
+# (spec requires bridge). Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.hostnet.yml up
+services:
+  load-balancer:
+    network_mode: host
+    ports: !reset []
+    networks: !reset []
+
+  api-1:
+    network_mode: host
+    networks: !reset []
+
+  api-2:
+    network_mode: host
+    networks: !reset []
+
+networks:
+  rinha: !reset null
